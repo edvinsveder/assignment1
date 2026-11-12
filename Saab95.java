@@ -2,12 +2,12 @@ import java.awt.*;
 
 public class Saab95 extends Car{
 
+    private boolean turboOn;
+
     public Saab95() {
         super(2, 125, Color.red, "Saab95");
         turboOn = false;
     }
-
-    private boolean turboOn;
 
     public void setTurboOn() {
         turboOn = true;
@@ -17,11 +17,11 @@ public class Saab95 extends Car{
         turboOn = false;
     }
     
+    
+    // Saab95 implements its own speedFactor as designadet by its superclass
     protected double speedFactor() {
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
     }
-    
-
 }

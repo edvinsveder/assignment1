@@ -1,0 +1,32 @@
+We conducted the following tests:
+
+* Check that turbo for the saab class affects speed correctly
+* Check that movement works. We should be able to make a full turn and also
+    increment our x&y values. 
+* Test reverse - As specified by the assignment description, we cannot 
+    have negative speed values 
+
+Results:
+
+* The turbo functions as intended. No issues were found after it had been moved
+    to its new subclass (Saab.java)
+* Movement works as expected. It is possible to make a full turn with both
+    vehicles as well as moving it around (updating the variables associated with
+    cardinals.)
+* Reverse - This test caught a bug. Here, we had set the condition in the code 
+    to be TRUE when the car COULD reverse - which led the results function to
+    print out SUCCESS when it should be FAILED
+
+Limitations & what we changed:
+
+* Initially our code utelized a try-except statement to prevent the user
+    from entering any values out of bounds. We found this to be a valid but
+    in this case inappropriate approach. In our case, this resulted in the 
+    program exiting where it would be better to eiter prompt the user for 
+    another input or to simply cap the inputs to 0 & 1 (anything out of bounds
+    will be rounded up or down to min or max values allowed.) 
+
+* Some of the classes had exposed fields that we caught on to whilst 
+    developing other parts of the program. We changes these accordingly
+    and created abstraction by using public functions to access these now
+    private fields.

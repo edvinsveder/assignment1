@@ -8,6 +8,7 @@ public class Volvo240 extends Car{
         super(4, 100, Color.black, "Volvo240");
     }
 
+    // Volvo240 implements its own speedFactor as designadet by its superclass
     protected double speedFactor() {
         return getEnginePower() * 0.01 * trimFactor;
     }

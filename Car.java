@@ -2,24 +2,40 @@ import java.awt.*;
 
 public abstract class Car implements Movable {
 
-    private int nrDoors; // Number of doors on the car
+    // Private fields used within the class 
+    private int nrDoors;        // Number of doors on the car
     private double enginePower; // Engine power of the car
-    private double currentSpeed; // The current speed of the car
-    private double savedSpeed; // Saving the speed in another variable
-    private Color color; // Color of the car
-    private String modelName; // The car model name00
-    private double x_cord;
-    private double y_cord;
-    private int direction;
+    private double currentSpeed;// The current speed of the car
+    private double savedSpeed;  // Saving the speed in another variable
+    private Color color;        // Color of the car
+    private String modelName;   // The car model name
+    private double x_cord;  // Current X location 
+    private double y_cord;  // Current Y location
+    private int direction;  // Current heading / direciton
 
-    protected abstract double speedFactor();   // Abstract var must be implemented in each subclass
+    protected abstract double speedFactor(); // Abstract var must be implemented in each subclass
     
     protected Car(int nrDoors, double enginePower, Color color, String modelName) { // Constructor
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
+        this.x_cord = 0;
+        this.y_cord = 0;
+        this.direction = 0;
         stopEngine();
+    }
+
+    public double getX() {
+        return x_cord;
+    }
+
+    public double getY() {
+        return y_cord;
+    }
+
+    public int getDirection() {
+        return direction;
     }
 
     public int getNrDoors() {
@@ -47,7 +63,6 @@ public abstract class Car implements Movable {
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
         if (getCurrentSpeed() > getEnginePower()) {
             currentSpeed = savedSpeed; // Reverting the change
-            throw new IllegalArgumentException("Speed cannot go above engine power");
         }
     }
 
@@ -56,9 +71,7 @@ public abstract class Car implements Movable {
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
         if (getCurrentSpeed() < 0 ) {
             currentSpeed = savedSpeed; // Reverting the change
-            throw new IllegalArgumentException("Speed cannot go below 0");
         }
-
     }
 
     public void startEngine() {
@@ -69,29 +82,27 @@ public abstract class Car implements Movable {
         currentSpeed = 0;
     }
      
-
     public void move() { // Update  
         switch (direction) {
             case 0:
                 this.y_cord = this.y_cord + currentSpeed; // Moves north
-                break;
+                return;
             
             case 1:
                 this.x_cord = this.x_cord + currentSpeed; // Moves east
-                break;
+                return;
             
             case 2:
                 this.y_cord = this.y_cord - currentSpeed; // Moves south
-                break;
+                return;
 
             case 3:
                 this.x_cord = this.x_cord - currentSpeed; // Moves west
-                break;
+                return;
 
             default:
-                break;
+                return;
         }        
-        return ;
     }
     
     public void turnLeft() {
@@ -109,16 +120,14 @@ public abstract class Car implements Movable {
     }
 
     public void gas(double amount) {
-        if (amount < 0 || amount > 1 ) { // Checks to make sure amount is in accepted range
-            throw new IllegalArgumentException("Amount cannot go below 0 or above 1");
-        }
+        if (amount > 1) amount = 1;
+        if (amount < 0) amount = 0;
         incrementSpeed(amount);
     }
 
     public void brake(double amount) {
-        if (amount < 0 || amount > 1 ) { // Checks to make sure amount is in accepted range
-            throw new IllegalArgumentException("Amount cannot go below 0 or above 1");
-        }
+        if (amount > 1) amount = 1;
+        if (amount < 0) amount = 0;
         decrementSpeed(amount);
-    }
+    }   
 }
