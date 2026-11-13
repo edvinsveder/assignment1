@@ -4,7 +4,8 @@ We conducted the following tests:
 * Check that movement works. We should be able to make a full turn and also
     increment our x&y values. 
 * Test reverse - As specified by the assignment description, we cannot 
-    have negative speed values 
+    have negative speed values
+* Gas and brake - We checked if it accepted values outside the range of [0, 1]
 
 Results:
 
@@ -16,6 +17,9 @@ Results:
 * Reverse - This test caught a bug. Here, we had set the condition in the code 
     to be TRUE when the car COULD reverse - which led the results function to
     print out SUCCESS when it should be FAILED
+* Gas and brake - It did not accept any values that were below 0 or higher than 1 as
+    instructed in the assignment details which also means it cannot increase speed
+    when using brake and cannot decrease speed when using gas.
 
 Limitations & what we changed:
 
