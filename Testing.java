@@ -59,15 +59,48 @@ public class Testing {
         saab.gas(-1);
         volvo.gas(-1);
         boolean saabResult = (saab.getCurrentSpeed() >= 0);
-        reportResult("Speed cannot be set to negative value", saabResult);
+        reportResult("Saab speed cannot be set to negative value", saabResult);
 
         boolean volvoResult = (volvo.getCurrentSpeed() >= 0);
-        reportResult("Speed cannot be set to negative value", volvoResult);
+        reportResult("Volvo speed cannot be set to negative value", volvoResult);
+    }
+
+    private static void testGasBrake() {
+        Saab95 saab = new Saab95();
+        Volvo240 volvo = new Volvo240();
+        // Speed cannot be higher than 5
+        saab.gas(5);
+        volvo.gas(5);
+
+        boolean saabResult = (saab.getCurrentSpeed() >= 0);
+        reportResult("Saab speed cannot be set to value higher than 1", saabResult);
+
+        boolean volvoResult = (volvo.getCurrentSpeed() >= 0);
+        reportResult("Volvo speed cannot be set to value higher than 1", volvoResult);
+
+        saab.brake(-1);
+        volvo.brake(-1);
+
+        boolean saabBrakeResult = (saab.getCurrentSpeed() >= 0);
+        reportResult("Saab brake cannot be set to negative value", saabBrakeResult);
+
+        boolean volvoBrakeResult = (volvo.getCurrentSpeed() >= 0);
+        reportResult("Volvo brake cannot be set to negative value", volvoBrakeResult);
+
+        saab.brake(5);
+        volvo.brake(5);
+
+        boolean saabHighBrakeResult = (saab.getCurrentSpeed() >= 0);
+        reportResult("Saab brake cannot be set to value higher than 1", saabHighBrakeResult);
+
+        boolean volvoHighBrakeResult = (volvo.getCurrentSpeed() >= 0);
+        reportResult("Volvo brake cannot be set to value higher than 1", volvoHighBrakeResult);
     }
 
     static void main() {
         testTurbo(); 
         testMovement();
         testReverse();
+        testGasBrake();
     }
 }
